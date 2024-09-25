@@ -1,17 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="d-flex flex-column min-vh-100 bg-light">
+    <the-header></the-header>
+    <div class="container-xxl">
+      <app-pkdex-search></app-pkdex-search>
+      <app-pkdex-grid></app-pkdex-grid>
+    </div>
+    <the-footer></the-footer>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from './components/Layout/TheHeader.vue';
+import AppPkdexSearch from './components/UI/AppPkdexSearch.vue';
+import TheFooter from './components/Layout/TheFooter.vue';
+import AppPkdexGrid from './components/UI/AppPkdexGrid.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    TheHeader,
+    AppPkdexSearch,
+    TheFooter,
+    AppPkdexGrid,
+  },
+};
 </script>
 
 <style>
@@ -21,6 +32,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

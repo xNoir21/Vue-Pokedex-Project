@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -53,9 +52,12 @@ export default {
         console.log('error empty search');
         return;
       }
+      let checkSearch = parseInt(this.data.searchQuery, 10).toString();
+      if (!isNaN(checkSearch)) {
+        this.data.searchQuery = checkSearch;
+      }
       this.$emit('search-pkmn', this.data);
       this.data.searchQuery = '';
-      this.data.searchType = '-1';
     },
   },
 };

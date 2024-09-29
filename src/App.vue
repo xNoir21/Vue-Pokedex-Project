@@ -4,8 +4,8 @@
     :can-cancel="true"
     :on-cancel="onCancel"
     :is-full-page="fullPage"
-     color="red"
-     loader="dots"
+    color="red"
+    loader="dots"
   />
   <div class="d-flex flex-column min-vh-100 bg-light">
     <the-header></the-header>

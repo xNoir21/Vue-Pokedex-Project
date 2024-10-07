@@ -129,12 +129,15 @@ export default {
       return type.type.name[0].toUpperCase() + type.type.name.slice(1);
     },
     pkmnAbility(ability) {
-      let statArray = ability.ability.name.split('-');
-      let statName = '';
-      statArray.forEach((item) => {
-        statName += item[0].toUpperCase() + item.slice(1) + ' ';
+      let abilityArray = ability.ability.name.split('-');
+      let abilityName = '';
+      if (ability.is_hidden) {
+        abilityName += '(Hidden Ability) ';
+      }
+      abilityArray.forEach((item) => {
+        abilityName += item[0].toUpperCase() + item.slice(1) + ' ';
       });
-      return statName;
+      return abilityName;
     },
     getPkmnAbilityDescription() {
       if (this.pkmnData) {
@@ -145,10 +148,18 @@ export default {
         }
         Promise.all(abilityPromises).then((result) => {
           for (let i = 0; i < result.length; i++) {
-            let abilityDescriptionEn = result[i].data.effect_entries.filter(
-              (entry) => entry.language.name === 'en'
-            );
-            this.abilityDescription[i] = abilityDescriptionEn[0].effect;
+            let abilityDescriptionEn;
+            if (result[i].data.effect_entries.length !== 0) {
+              abilityDescriptionEn = result[i].data.effect_entries.filter(
+                (entry) => entry.language.name === 'en'
+              );
+              this.abilityDescription[i] = abilityDescriptionEn[0].effect;
+            } else {
+              abilityDescriptionEn = result[i].data.flavor_text_entries.filter(
+                (entry) => entry.language.name === 'en'
+              );
+              this.abilityDescription[i] = abilityDescriptionEn[0].flavor_text;
+            }
           }
         });
       }

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-3" />
       <div class="col-6">
-        <form @submit.prevent="searchPkmnCheck">
+        <form @submit.prevent>
           <fieldset>
             <legend>Search for a Pokémon!</legend>
             <!-- Search input -->
@@ -27,7 +27,8 @@
                 </option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" @click="searchPkmnCheck">Submit</button>
+            <button type="submit" class="btn btn-primary m-2" @click="getRandomPokemon">Get Random Pokémon</button>
           </fieldset>
         </form>
       </div>
@@ -49,16 +50,22 @@ export default {
   methods: {
     searchPkmnCheck() {
       if (this.data.searchQuery === '' || this.data.searchType === '-1') {
-        console.log('error empty search');
         return;
       }
       let checkSearch = parseInt(this.data.searchQuery, 10).toString();
       if (!isNaN(checkSearch)) {
         this.data.searchQuery = checkSearch;
+      } else {
+        this.data.searchQuery = this.data.searchQuery.toLowerCase();
       }
       this.$emit('search-pkmn', this.data);
       this.data.searchQuery = '';
     },
+    getRandomPokemon(){
+      this.data.searchQuery = Math.floor(Math.random() * 1025);
+      this.data.searchType = 'pokemon';
+      this.searchPkmnCheck();
+    }
   },
 };
 </script>

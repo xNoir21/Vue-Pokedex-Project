@@ -34,7 +34,7 @@
       <div class="col-sm-8">
         <!-- pokemon type -->
         <div class="row border">
-          <div class="col-sm">
+          <div class="e-sm">
             <strong>Type/</strong>
             <div
               v-for="(type, idx) in pkmnData.data.types"
@@ -103,11 +103,9 @@ export default {
     };
   },
   mounted() {
-    console.log('on mounted');
     this.getPkmnAbilityDescription();
   },
   updated() {
-    console.log('on update');
     this.getPkmnAbilityDescription();
   },
   computed: {
@@ -120,7 +118,6 @@ export default {
   },
   methods: {
     pkmnStat(stat) {
-      console.log(stat);
       let statArray = stat.stat.name.split('-');
       let statName = '';
       statArray.forEach((item) => {
